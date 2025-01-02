@@ -1,10 +1,10 @@
-import HomeIcon from "../../assets/icons/home.svg";
-import Notification from "../../assets/icons/notification.svg";
-import Avatar from "../../assets/images/avatars/avatar_1.png";
-import Logo from "../../assets/images/logo.svg";
-import Logout from "../auth/Logout";
+import HomeIcon from "../assets/icons/home.svg";
+import Notification from "../assets/icons/notification.svg";
+import Avatar from "../assets/images/avatars/avatar_1.png";
+import Logo from "../assets/images/logo.svg";
 
 import { Link } from "react-router-dom";
+import LogOut from "./auth/LogOut";
 
 const Header = () => {
   return (
@@ -27,7 +27,7 @@ const Header = () => {
             <img src={Notification} alt="Notification" />
           </button>
 
-          <Logout />
+          <LogOut />
 
           <Link to="/me" className="flex-center !ml-8 gap-3">
             <span className="text-lg font-medium lg:text-xl">Sumit</span>

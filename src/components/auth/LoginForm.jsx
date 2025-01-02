@@ -34,8 +34,7 @@ const LoginForm = () => {
             type="email"
           ></input>
         </Field>
-        <Field label="Password">
-          error = {errors.password}
+        <Field label="Password" error={errors.password}>
           <input
             type="password"
             name="password"
@@ -59,3 +58,5 @@ const LoginForm = () => {
     </>
   );
 };
+
+export default LoginForm;
