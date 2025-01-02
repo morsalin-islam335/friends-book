@@ -1,7 +1,11 @@
 import HomeIcon from "../assets/icons/home.svg";
 import Notification from "../assets/icons/notification.svg";
-import Avatar from "../assets/images/avatars/avatar_1.png";
-import Logo from "../assets/images/logo.svg";
+// import Avatar from "../assets/images/avatars/avatar_1.png";
+// import Avatar from "../assets/images/avatars/ProfilePicture.jpg";
+import Avatar from "../assets/images/avatars/ProfilePic.png";
+// import Logo from "../assets/images/logo.svg";
+// import Logo from "../assets/icons/friendsBookLogo.svg";
+import Logo from "../assets/images/logo.png";
 
 import { Link } from "react-router-dom";
 import LogOut from "./auth/LogOut";
@@ -30,9 +34,20 @@ const Header = () => {
           <LogOut />
 
           <Link to="/me" className="flex-center !ml-8 gap-3">
-            <span className="text-lg font-medium lg:text-xl">Sumit</span>
+            <span className="text-lg font-medium lg:text-xl">
+              Morsalin Islam
+            </span>
+
+            {/* <img
+              className="rounded rouned-full max-h-[32px] max-w-[32px] lg:max-h-[44px] lg:max-w-[44px]"
+              src={Avatar}
+              alt="avatar"
+
+
+            /> */}
+
             <img
-              className="max-h-[32px] max-w-[32px] lg:max-h-[44px] lg:max-w-[44px]"
+              className="rounded-full h-[60px] w-[60px] lg:h-[44px] lg:w-[44px]"
               src={Avatar}
               alt="avatar"
             />
