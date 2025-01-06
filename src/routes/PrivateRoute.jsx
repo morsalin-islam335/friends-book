@@ -4,6 +4,7 @@ import useAuth from "./../hooks/useAuth";
 
 export default function PrivateRoutes() {
   const { auth } = useAuth();
+  console.log(auth);
   return (
     <>
       {auth.user ? (
