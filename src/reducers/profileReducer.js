@@ -9,7 +9,7 @@ const initialState = {
 
 const profilelReducer = (state, action) => {
   switch (action.type) {
-    case actions.profilel.DATA_FETCHING: {
+    case actions.profile.DATA_FETCHING: {
       // this actions will pass as action.type [action.type = actions]
       return {
         ...state,
