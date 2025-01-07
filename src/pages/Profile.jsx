@@ -46,7 +46,6 @@ export default function Profile() {
 
   return (
     <>
-      <h1>Profile Info </h1>
       <ProfileInfo />
       {/* <MyPosts />  */}
     </>

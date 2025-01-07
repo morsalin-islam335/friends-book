@@ -8,10 +8,11 @@ import { useProfile } from "./../../hooks/useProfile";
 
 export default function Bio() {
   const { state, dispatch } = useProfile();
+  console.log("state is ", state?.user?.bio);
 
   const { api } = useAxios();
 
-  const [bio, setBio] = useState(state?.user?.bio);
+  const [bio, setBio] = useState(state?.user?.bio || "hello world");
   const [editMode, setEditMode] = useState(false);
 
   const handleBioChange = async (event) => {
@@ -47,7 +48,7 @@ export default function Bio() {
       <div className="mt-4 flex items-start gap-2 lg:mt-6">
         <div className="flex-1">
           {!editMode ? (
-            <p className="leading-[188%] text-gray-400 lg:text-lg">
+            <p className="leading-[188%] text-grey-400 lg:text-lg">
               {state?.user?.bio}
             </p>
           ) : (

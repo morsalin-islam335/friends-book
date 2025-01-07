@@ -2,15 +2,20 @@ import HomeIcon from "../assets/icons/home.svg";
 import Notification from "../assets/icons/notification.svg";
 // import Avatar from "../assets/images/avatars/avatar_1.png";
 // import Avatar from "../assets/images/avatars/ProfilePicture.jpg";
-import Avatar from "../assets/images/avatars/ProfilePic.png";
+import Avatar from "../assets/images/avatars/DefaultAvatar.jpg";
 // import Logo from "../assets/images/logo.svg";
 // import Logo from "../assets/icons/friendsBookLogo.svg";
 import Logo from "../assets/images/logo.png";
 
 import { Link } from "react-router-dom";
+import useAuth from "./../hooks/useAuth";
 import LogOut from "./auth/LogOut";
 
 const Header = () => {
+  const { auth } = useAuth();
+  const authProfileIcon = `${import.meta.env.VITE_SERVER_BASE_URL}/${
+    auth.user.avatar
+  }`;
   return (
     <nav className="sticky top-0 z-50 border-b border-[#3F3F3F] bg-[#1E1F24] py-4">
       <div className="container flex flex-col items-center justify-between gap-6 sm:flex-row">
@@ -48,7 +53,7 @@ const Header = () => {
 
             <img
               className="rounded-full h-[60px] w-[60px] lg:h-[44px] lg:w-[44px]"
-              src={Avatar}
+              src={authProfileIcon || Avatar}
               alt="avatar"
             />
           </Link>
