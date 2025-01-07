@@ -1,18 +1,47 @@
+import axios from "axios";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
 import Field from "../Field";
 
 const LoginForm = () => {
   const navigate = useNavigate();
+  const { setAuth } = useAuth();
 
   const {
     register,
     handleSubmit,
+    setError,
     formState: { errors },
   } = useForm();
 
-  const submitForm = (formData) => {
-    console.log(formData);
+  const submitForm = async (formData) => {
+    try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_SERVER_URL}/auth/login`,
+        formData
+      );
+
+      if (response.status === 200) {
+        //ok
+        const { token, user } = response.data; // response.data have 2 object: user and token
+        if (token) {
+          const authToken = token.token;
+          const refreshToken = token.refreshToken;
+          setAuth({
+            user,
+            authToken,
+            refreshToken,
+          });
+        }
+      }
+    } catch (error) {
+      console.error(error);
+      setError("root.random", {
+        type: "random",
+        message: `User with email ${formData.email} is not found`,
+      });
+    }
     navigate("/");
   };
   return (
@@ -27,7 +56,7 @@ const LoginForm = () => {
               required: "Email  is required",
             })}
             className={`auth-input ${
-              !!errors.email ? "border-red-500" : "border-gray-200"
+              errors.email ? "border-red-500" : "border-gray-200"
             }`}
             name="email"
             id="email"
