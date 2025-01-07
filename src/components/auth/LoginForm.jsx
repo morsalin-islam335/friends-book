@@ -1,12 +1,14 @@
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import useAuth from "../../hooks/useAuth";
 import Field from "../Field";
+
+import { useContext } from "react";
+import { AuthContext } from "../../context";
 
 const LoginForm = () => {
   const navigate = useNavigate();
-  const { setAuth } = useAuth();
+  const { setAuth } = useContext(AuthContext);
 
   const {
     register,
