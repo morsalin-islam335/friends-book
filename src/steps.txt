@@ -1,0 +1,2 @@
+steps = ...previousSteps
+steps -> next = working with profile page bio and image
