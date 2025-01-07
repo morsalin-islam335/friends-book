@@ -45,8 +45,8 @@ export default function Profile() {
 
   return (
     <>
-      <ProfileInfo />
-      <MyPosts />
+      {/* <ProfileInfo />
+      <MyPosts /> */}
     </>
   );
 }
