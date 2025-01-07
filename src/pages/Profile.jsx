@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import MyPosts from "../components/posts/MyPosts";
 import ProfileInfo from "../components/profile/ProfileInfo";
 import useAxios from "../hooks/useAxios";
 import { actions } from "./../actions/index";
@@ -47,7 +48,7 @@ export default function Profile() {
   return (
     <>
       <ProfileInfo />
-      {/* <MyPosts />  */}
+      <MyPosts />
     </>
   );
 }
