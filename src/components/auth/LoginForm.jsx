@@ -89,3 +89,5 @@ const LoginForm = () => {
 };
 
 export default LoginForm;
+
+// successfully complete JWT base authentication
