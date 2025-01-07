@@ -5,7 +5,7 @@ import NotFoundPage from "./pages/NotFoundPage";
 import Profile from "./pages/ProfilePage";
 import RegistrationPage from "./pages/RegistrationPage";
 import PrivateRoutes from "./routes/PrivateRoute";
-
+import ProfileProvider from "./provider/ProfileProvider";
 export default function App() {
   return (
     <>

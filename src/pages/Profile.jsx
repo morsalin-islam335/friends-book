@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import ProfileInfo from "../components/profile/ProfileInfo";
 import useAxios from "../hooks/useAxios";
 import { actions } from "./../actions/index";
 import useAuth from "./../hooks/useAuth";
@@ -46,8 +47,8 @@ export default function Profile() {
   return (
     <>
       <h1>Profile Info </h1>
-      {/* <ProfileInfo />
-      <MyPosts />  */}
+      <ProfileInfo />
+      {/* <MyPosts />  */}
     </>
   );
 }
