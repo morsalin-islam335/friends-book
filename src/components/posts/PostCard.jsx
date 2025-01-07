@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import PostAction from "./PostAction";
 import PostBody from "./PostBody";
 import PostComments from "./PostComments";
