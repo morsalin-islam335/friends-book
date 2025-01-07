@@ -1,9 +1,14 @@
+import { useProfile } from "./../../hooks/useProfile";
+import PostList from "./PostList";
+
 export default function MyPosts() {
+  const { state } = useProfile();
+  const posts = state?.posts;
+
   return (
     <>
-      <div>
-        <h1>My posts</h1>
-      </div>
+      <h4 className="mt-6 text-xl lg:mt-8 lg:text-2xl"></h4>
+      <PostList posts={posts} />
     </>
   );
 }
