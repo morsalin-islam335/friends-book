@@ -10,7 +10,7 @@ const useAxios = () => {
   useEffect(() => {
     // request intercepter
 
-    api.interceptors.request.use(
+    const requestInterceptor = api.interceptors.request.use(
       (config) => {
         const authToken = auth?.authToken;
         // auth token = auth.authtoken
@@ -24,7 +24,7 @@ const useAxios = () => {
       (error) => Promise.reject(error)
     );
 
-    api.interceptors.response.use(
+    const responseInterceptor = api.interceptors.response.use(
       (response) => response, // first parametter will return response
 
       async (error) => {
@@ -36,6 +36,7 @@ const useAxios = () => {
           orginalRequest._retry = true;
           //
           // token has expired
+          // eslint-disable-next-line no-useless-catch
           try {
             const refreshToken = auth?.refreshToken;
             const response = await axios.post(
@@ -52,11 +53,21 @@ const useAxios = () => {
             // Retry the original request with the new token
             orginalRequest.headers.Authorization = `Bearer ${token}`;
             return axios(orginalRequest);
-          } catch {}
+          } catch (error) {
+            throw error;
+          }
         }
 
         return Promise.eject(error);
       }
     );
-  }, []);
+
+    return () => {
+      api.interceptors.request.eject(requestInterceptor);
+      api.interceptors.response.eject(responseInterceptor);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [auth?.authToken]);
+
+  return { api };
 };
