@@ -2,6 +2,7 @@ import useAuth from "../hooks/useAuth";
 
 export default function HomePage() {
   const { auth } = useAuth();
+  console.log(auth);
   // console.log(auth.user);
   return (
     <>
