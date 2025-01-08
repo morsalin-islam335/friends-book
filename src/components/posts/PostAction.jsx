@@ -4,6 +4,7 @@ import LikeIcon from "../../assets/icons/like.svg";
 
 import ShareIcon from "../../assets/icons/share.svg";
 
+// eslint-disable-next-line react/prop-types
 export default function PostAction({ postId, commentCount }) {
   return (
     <>
