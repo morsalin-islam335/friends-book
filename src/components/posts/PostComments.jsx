@@ -1,9 +1,11 @@
 /* eslint-disable react/prop-types */
+import { useState } from "react";
 import { useAvatar } from "./../../hooks/useAvatar";
 import PostCommentList from "./PostCommentList";
 
 export default function PostComments({ post }) {
   const { avatarURL } = useAvatar(post);
+  const [showComments, setShowComments] = useState(false);
 
   return (
     <>
@@ -25,12 +27,15 @@ export default function PostComments({ post }) {
           </div>
         </div>
         <div className="mt-4">
-          <button className="text-gray-300 max-md:text-sm">
+          <button
+            onClick={() => setShowComments(!showComments)}
+            className="text-gray-300 max-md:text-sm"
+          >
             All Comment ▾
           </button>
         </div>
 
-        <PostCommentList comments={post?.comments} />
+        {showComments && <PostCommentList comments={post?.comments} />}
       </div>
     </>
   );

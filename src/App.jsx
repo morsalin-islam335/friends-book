@@ -1,17 +1,17 @@
 import { Route, Routes } from "react-router-dom";
-import HomePage from "./pages/Homepage";
+import Home from "./pages/Home";
 import LoginPage from "./pages/LoginPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import Profile from "./pages/ProfilePage";
 import RegistrationPage from "./pages/RegistrationPage";
 import PrivateRoutes from "./routes/PrivateRoute";
-import ProfileProvider from "./provider/ProfileProvider";
+
 export default function App() {
   return (
     <>
       <Routes>
         <Route element={<PrivateRoutes />}>
-          <Route element={<HomePage />} path="/" exact />
+          <Route element={<Home />} path="/" exact />
           <Route element={<Profile />} path="/me" />
         </Route>
 
