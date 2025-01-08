@@ -53,7 +53,7 @@ const Header = () => {
 
             <img
               className="rounded-full h-[60px] w-[60px] lg:h-[44px] lg:w-[44px]"
-              src={authProfileIcon || Avatar}
+              src={authProfileIcon && Avatar}
               alt="avatar"
             />
           </Link>

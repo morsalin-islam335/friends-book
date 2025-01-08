@@ -1,6 +1,6 @@
 import { useRef } from "react";
-
 import EditIcon from "../../assets/icons/edit.svg";
+import Avatar from "../../assets/images/avatars/DefaultAvatar.jpg";
 import useAxios from "./../../hooks/useAxios";
 import { useProfile } from "./../../hooks/useProfile";
 
@@ -62,7 +62,11 @@ export default function ProfileImage() {
       <div className="relative mb-8 max-h-[180px] max-w-[180px] rounded-full lg:mb-11 lg:max-h-[218px] lg:max-w-[218px]">
         <img
           className="max-w-full rounded-full"
-          src={`${import.meta.env.VITE_SERVER_BASE_URL}/${state?.user?.avatar}`}
+          src={
+            state?.user?.avatar
+              ? `${import.meta.env.VITE_SERVER_BASE_URL}/${state.user.avatar}`
+              : Avatar
+          }
           alt={`${state?.user?.firstName}`}
         />
 
