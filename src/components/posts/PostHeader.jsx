@@ -7,6 +7,7 @@ import EditIcon from "../../assets/icons/edit.svg";
 
 import TimeIcon from "../../assets/icons/time.svg";
 import { useAvatar } from "../../hooks/useAvatar";
+import { getDateTimeDifferenceFromNow } from "../../utils";
 
 export default function PostHeader({ post }) {
   const [showAction, setShowAction] = useState(false);
@@ -29,7 +30,7 @@ export default function PostHeader({ post }) {
             <h6 className="text-lg lg:text-xl">{post?.author?.name}</h6>
             <div className="flex items-center gap-1.5">
               <img src={TimeIcon} alt="time" />
-              <span className="text-sm text-gray-400 lg:text-base">{`${getDateDifferenceFromNow(
+              <span className="text-sm text-gray-400 lg:text-base">{`${getDateTimeDifferenceFromNow(
                 post?.createAt
               )} ago`}</span>
               <span className="text-sm text-gray-400 lg:text-base"></span>
