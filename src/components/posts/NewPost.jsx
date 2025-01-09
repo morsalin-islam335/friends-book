@@ -9,7 +9,7 @@ export default function NewPost() {
   return (
     <>
       {showPostEntry ? (
-        <PostEntry />
+        <PostEntry onCreateOrCancel={() => setShowPostEntry(false)} />
       ) : (
         <div className="card">
           <div className="flex-center mb-3 gap-2 lg:gap-4">

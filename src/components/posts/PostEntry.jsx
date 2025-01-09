@@ -10,7 +10,7 @@ import Field from "./../Field";
 
 import AddPhoto from "../../assets/icons/addPhoto.svg";
 
-const PostEntry = ({ onCreate }) => {
+const PostEntry = ({ onCreateOrCancel }) => {
   const { auth } = useAuth();
   const { dispatch } = usePost();
   const { api } = useAxios();
@@ -41,7 +41,7 @@ const PostEntry = ({ onCreate }) => {
           data: response.data,
         });
         // Close this UI
-        onCreate();
+        onCreateOrCancel();
       }
     } catch (error) {
       console.error(error);
@@ -95,12 +95,19 @@ const PostEntry = ({ onCreate }) => {
             className="h-[120px] w-full bg-transparent focus:outline-none lg:h-[160px]"
           ></textarea>
         </Field>
-        <div className="border-t border-[#3F3F3F] pt-4 lg:pt-6">
+        <div className="flex gap-6 border-t border-[#3F3F3F] pt-4 lg:pt-6">
           <button
             className="auth-input bg-morsalinGreen font-bold text-deepDark transition-all hover:opacity-90"
             type="submit"
           >
             Post
+          </button>
+
+          <button
+            className="auth-input bg-red-500 font-bold text-deepDark transition-all hover:opacity-90"
+            onClick={onCreateOrCancel}
+          >
+            Cancel
           </button>
         </div>
       </form>

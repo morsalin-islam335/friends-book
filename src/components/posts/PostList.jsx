@@ -2,6 +2,7 @@
 import PostCard from "./PostCard";
 
 export default function PostList({ posts }) {
+  console.log("post list : ", posts);
   return (
     <>
       {posts &&
