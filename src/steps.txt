@@ -3,3 +3,6 @@ steps -> next = working with profile page bio and image
 -> next = show profile posts
 -> next = new user registration feature
 
+
+-> next = implement like and comment feature
+
