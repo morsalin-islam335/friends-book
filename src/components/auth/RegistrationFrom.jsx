@@ -95,13 +95,15 @@ export default function RegistrationForm() {
             id="password"
           />
         </Field>
-        <p>{errors?.root?.random?.message}</p>
+
         <button
           className="auth-input bg-morsalinGreen font-bold text-deepDark transition-all hover:opacity-90"
           type="submit"
         >
           Register
         </button>
+
+        <p className="text-red-500">{errors?.root?.random?.message}</p>
       </form>
     </>
   );
