@@ -21,7 +21,7 @@ const Header = () => {
       <div className="container flex flex-col items-center justify-between gap-6 sm:flex-row">
         <Link to="/">
           <img
-            className="max-w-[100px] lg:max-w-[140px]"
+            className="max-w-[60px] lg:max-w-[100px]"
             src={Logo}
             alt="logo"
           />
