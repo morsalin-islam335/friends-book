@@ -35,6 +35,8 @@ const LoginForm = () => {
             authToken,
             refreshToken,
           });
+
+          navigate("/");
         }
       }
     } catch (error) {
@@ -44,7 +46,6 @@ const LoginForm = () => {
         message: `User with email ${formData.email} is not found`,
       });
     }
-    navigate("/");
   };
   return (
     <>
@@ -80,11 +81,14 @@ const LoginForm = () => {
             className={`auth-input ${errors.password}? "border-red-500": "border-gray-200"`}
           ></input>
         </Field>
+
         <Field>
           <button className="auth-input bg-morsalinGreen font-bold text-deepDark transition-all hover:opacity-90">
             Login
           </button>
         </Field>
+
+        <p className="text-red-500">{errors?.root?.random?.message}</p>
       </form>
     </>
   );
