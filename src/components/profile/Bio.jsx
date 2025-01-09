@@ -12,7 +12,7 @@ export default function Bio() {
 
   const { api } = useAxios();
 
-  const [bio, setBio] = useState(state?.user?.bio || "hello world");
+  const [bio, setBio] = useState(state?.user?.bio ?? "hello world");
   const [editMode, setEditMode] = useState(false);
 
   const handleBioChange = async (event) => {
@@ -32,6 +32,7 @@ export default function Bio() {
           type: actions.profile.USER_DATA_FETCHED,
           data: response.data,
         });
+        setBio(response.data);
       }
 
       setEditMode(false);

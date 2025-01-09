@@ -6,3 +6,5 @@ steps -> next = working with profile page bio and image
 
 -> next = implement like and comment feature
 
+-> next = implement create , update and delete post features
+
