@@ -1,12 +1,15 @@
-import { useEffect, useReducer } from "react";
+import { useEffect } from "react";
 import { actions } from "../actions";
 import PostList from "../components/posts/PostList";
 
 import useAxios from "../hooks/useAxios";
-import { initialState, postReducer } from "../reducers/postReducer";
+import usePost from "../hooks/usePost";
+// import NewPost from "../components/posts/NewPost";
 
 const HomePage = () => {
-  const [state, dispatch] = useReducer(postReducer, initialState);
+  // const [state, dispatch] = useReducer(postReducer, initialState);
+  const { state, dispatch } = usePost(); // now we can access state and dispatch by using usePost hook
+
   const { api } = useAxios();
 
   useEffect(() => {
