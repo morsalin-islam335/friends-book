@@ -1,11 +1,38 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
+import useAuth from "./../../hooks/useAuth";
 import { useAvatar } from "./../../hooks/useAvatar";
+import useAxios from "./../../hooks/useAxios";
 import PostCommentList from "./PostCommentList";
 
 export default function PostComments({ post }) {
   const { avatarURL } = useAvatar(post);
   const [showComments, setShowComments] = useState(false);
+  const { auth } = useAuth();
+  const [comments, setComments] = useState(post?.comments);
+  const [comment, setComment] = useState("");
+
+  const { api } = useAxios();
+
+  const addComment = async (event) => {
+    const keyCode = event.keyCode;
+
+    if (keyCode === 13) {
+      try {
+        const response = await api.patch(
+          `${import.meta.env.VITE_SERVER_BASE_URL}/posts/${post.id}/comment`,
+          { comment }
+        );
+
+        if (response.status === 200) {
+          setComments([...response.data.comments]); // as it is patch request so response.data.comments will return all comments including new comment
+        }
+        setComment("");
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  };
 
   return (
     <>
@@ -23,6 +50,10 @@ export default function PostComments({ post }) {
               className="h-8 w-full rounded-full bg-lighterDark px-4 text-xs focus:outline-none sm:h-[38px]"
               name="post"
               placeholder="What's on your mind?"
+              id="post"
+              value={comment}
+              onChange={(e) => setComment(e.target.value)}
+              onKeyDown={(e) => addComment(e)}
             />
           </div>
         </div>
@@ -35,7 +66,7 @@ export default function PostComments({ post }) {
           </button>
         </div>
 
-        {showComments && <PostCommentList comments={post?.comments} />}
+        {showComments && <PostCommentList comments={comments} />}
       </div>
     </>
   );
