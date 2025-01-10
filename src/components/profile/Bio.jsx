@@ -8,7 +8,7 @@ import { useProfile } from "./../../hooks/useProfile";
 
 export default function Bio() {
   const { state, dispatch } = useProfile();
-  console.log("state is ", state?.user?.bio);
+  // console.log("state is ", state?.user?.bio);
 
   const { api } = useAxios();
 

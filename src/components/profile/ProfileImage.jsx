@@ -4,9 +4,14 @@ import Avatar from "../../assets/images/avatars/DefaultAvatar.jpg";
 import useAxios from "./../../hooks/useAxios";
 import { useProfile } from "./../../hooks/useProfile";
 
+import useAuth from "../../hooks/useAuth";
 import { actions } from "./../../actions/index";
+
 export default function ProfileImage() {
   const { state, dispatch } = useProfile();
+  const { auth, setAuth } = useAuth(); // retrive auth and setAuth from useAuth hook
+
+  console.log("state from profileImage ", state);
 
   const { api } = useAxios();
 
@@ -46,7 +51,17 @@ export default function ProfileImage() {
           data: response.data,
         });
 
-        console.log("Update Profile Image", response.data);
+        setAuth((prevAuth) => {
+          return {
+            ...prevAuth,
+            user: {
+              ...prevAuth.user,
+              avatar: response.data.avatar,
+            },
+          };
+        });
+
+        console.log("Update Profile Image and data is", response.data);
       }
     } catch (error) {
       console.log(error);
