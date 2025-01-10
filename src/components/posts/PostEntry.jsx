@@ -63,7 +63,9 @@ const PostEntry = ({ onCreateOrCancel }) => {
           <div className="flex items-center gap-3">
             <img
               className="max-w-10 max-h-10 rounded-full lg:max-h-[58px] lg:max-w-[58px]"
-              src={`${import.meta.env.VITE_SERVER_BASE_URL}/${user?.avatar}`}
+              src={`${import.meta.env.VITE_SERVER_BASE_URL}/${
+                auth?.user?.avatar
+              }`}
               alt="avatar"
             />
             <div>

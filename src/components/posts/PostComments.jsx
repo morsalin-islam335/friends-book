@@ -1,13 +1,15 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
-import { useAvatar } from "./../../hooks/useAvatar";
+import useAuth from "../../hooks/useAuth";
 import useAxios from "./../../hooks/useAxios";
 import PostCommentList from "./PostCommentList";
 // import {useEffect} from "react";
 
 export default function PostComments({ post, comments, onComments }) {
-  const { avatarURL } = useAvatar(post);
+  // const { avatarURL } = useAvatar(post);
   const [showComments, setShowComments] = useState(false);
+
+  const { auth } = useAuth();
   // const { auth } = useAuth();
   // const [comments, setComments] = useState(post?.comments); // take it from parrent component
 
@@ -46,7 +48,9 @@ export default function PostComments({ post, comments, onComments }) {
         <div className="flex-center mb-3 gap-2 lg:gap-4">
           <img
             className="max-w-7 max-h-7 rounded-full lg:max-h-[34px] lg:max-w-[34px]"
-            src={avatarURL}
+            src={`${import.meta.env.VITE_SERVER_BASE_URL}/${
+              auth?.user?.avatar
+            }`}
             alt="avatar"
           />
 
