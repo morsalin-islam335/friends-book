@@ -8,6 +8,7 @@ import Avatar from "../assets/images/avatars/DefaultAvatar.jpg";
 import Logo from "../assets/images/logo.png";
 
 import { Link } from "react-router-dom";
+import { useProfile } from "../hooks/useProfile";
 import useAuth from "./../hooks/useAuth";
 import LogOut from "./auth/LogOut";
 
@@ -16,6 +17,12 @@ const Header = () => {
   const authProfileIcon = `${import.meta.env.VITE_SERVER_BASE_URL}/${
     auth.user.avatar
   }`;
+
+  console.log("auth from header: ", auth);
+  const { state } = useProfile();
+  console.log("state from header: ", state);
+
+  // const { avatarURL: authProfileIcon } = useAvatar();
   return (
     <nav className="sticky top-0 z-50 border-b border-[#3F3F3F] bg-[#1E1F24] py-4">
       <div className="container flex flex-col items-center justify-between gap-6 sm:flex-row">
