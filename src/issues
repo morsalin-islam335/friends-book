@@ -1,0 +1,21 @@
+######## Present issues and upcoming features ##########
+
+Profile Bio wont client side wont update synkly
+
+After Comment Its state wont update instantly from client side
+
+After Change Profile Photo Header profile icon wont update instantly
+
+Visible edit and delete iocn for post's owner
+
+Show Toast Message with tostify
+
+Use React ToolKit for catching
+
+Use Firebase for authentication
+
+Make useLocalStorage hook for storage login credintial
+
+Use Framer Motion for animation
+
+Implement REST API for backend

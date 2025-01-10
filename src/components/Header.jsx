@@ -8,7 +8,6 @@ import Avatar from "../assets/images/avatars/DefaultAvatar.jpg";
 import Logo from "../assets/images/logo.png";
 
 import { Link } from "react-router-dom";
-import { useProfile } from "../hooks/useProfile";
 import useAuth from "./../hooks/useAuth";
 import LogOut from "./auth/LogOut";
 
@@ -18,11 +17,7 @@ const Header = () => {
     auth.user.avatar
   }`;
 
-  console.log("auth from header: ", auth);
-  const { state } = useProfile();
-  console.log("state from header: ", state);
-
-  // const { avatarURL: authProfileIcon } = useAvatar();
+  console.log(auth);
   return (
     <nav className="sticky top-0 z-50 border-b border-[#3F3F3F] bg-[#1E1F24] py-4">
       <div className="container flex flex-col items-center justify-between gap-6 sm:flex-row">
@@ -47,7 +42,7 @@ const Header = () => {
 
           <Link to="/me" className="flex-center !ml-8 gap-3">
             <span className="text-lg font-medium lg:text-xl">
-              Morsalin Islam
+              {auth?.user?.firstName} {auth?.user?.lastName}
             </span>
 
             {/* <img
@@ -60,7 +55,7 @@ const Header = () => {
 
             <img
               className="rounded-full h-[60px] w-[60px] lg:h-[44px] lg:w-[44px]"
-              src={authProfileIcon && Avatar}
+              src={authProfileIcon ?? Avatar}
               alt="avatar"
             />
           </Link>
