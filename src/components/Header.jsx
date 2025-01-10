@@ -8,10 +8,13 @@ import Avatar from "../assets/images/avatars/DefaultAvatar.jpg";
 import Logo from "../assets/images/logo.png";
 
 import { Link } from "react-router-dom";
+import { useProfile } from "../hooks/useProfile";
 import useAuth from "./../hooks/useAuth";
 import LogOut from "./auth/LogOut";
 
 const Header = () => {
+  const { state } = useProfile();
+  console.log("state from header from useProfile hook", state);
   const { auth } = useAuth();
   const authProfileIcon = `${import.meta.env.VITE_SERVER_BASE_URL}/${
     auth.user.avatar

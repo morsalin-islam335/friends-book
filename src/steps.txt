@@ -8,3 +8,5 @@ steps -> next = working with profile page bio and image
 
 -> next = implement create , update and delete post features
 
+
+now in header chcck if it get profile then set its image otherwise set from auth 

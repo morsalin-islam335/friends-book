@@ -1,10 +1,10 @@
-// eslint-disable-next-line react/prop-types
+/* eslint-disable react/prop-types */
+
 export default function PostCommentList({ comments }) {
   return (
     <>
       <div className="space-y-4 divide-y divide-lighterDark pl-2 lg:pl-3">
         {comments &&
-          // eslint-disable-next-line react/prop-types
           comments.map((comment) => (
             <div className="flex items-center gap-3 pt-4" key={comment.id}>
               <img
@@ -17,7 +17,9 @@ export default function PostCommentList({ comments }) {
 
               <div>
                 <div className="flex gap-1 text-xs lg:text-sm">
-                  <span>{comment?.author?.name}</span>
+                  <span className="font-extrabold">
+                    {comment?.author?.name}
+                  </span>
                   <span>{comment?.comment}</span>
                 </div>
               </div>

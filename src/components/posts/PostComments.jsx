@@ -1,15 +1,16 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
-import useAuth from "./../../hooks/useAuth";
 import { useAvatar } from "./../../hooks/useAvatar";
 import useAxios from "./../../hooks/useAxios";
 import PostCommentList from "./PostCommentList";
+// import {useEffect} from "react";
 
-export default function PostComments({ post }) {
+export default function PostComments({ post, comments, onComments }) {
   const { avatarURL } = useAvatar(post);
   const [showComments, setShowComments] = useState(false);
-  const { auth } = useAuth();
-  const [comments, setComments] = useState(post?.comments);
+  // const { auth } = useAuth();
+  // const [comments, setComments] = useState(post?.comments); // take it from parrent component
+
   const [comment, setComment] = useState("");
 
   const { api } = useAxios();
@@ -25,7 +26,12 @@ export default function PostComments({ post }) {
         );
 
         if (response.status === 200) {
-          setComments([...response.data.comments]); // as it is patch request so response.data.comments will return all comments including new comment
+          onComments((prevComments) => [
+            ...prevComments,
+            response.data.comments[response.data.comments.length - 1],
+          ]); // as it is patch request so response.data.comments will return all comments including new comment
+          // () => setComments([...response.data.comments]);
+          console.log(response.data);
         }
         setComment("");
       } catch (error) {
