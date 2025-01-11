@@ -40,10 +40,16 @@ const postReducer = (state, action) => {
     }
 
     case actions.post.DATA_EDITED: {
+      // const upDatePostId = state.posts.findIndex(post => post.id === action.data.id) // it will return update post index
+      const newPosts = state.posts.map((post) => {
+        if (post.id === action.data.id) return action.data;
+        else return post;
+      });
+
       return {
         ...state,
         loading: false,
-        user: action.data,
+        posts: [...newPosts],
       };
     }
 

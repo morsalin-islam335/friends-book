@@ -19,48 +19,54 @@ const PostEntry = ({ onCreateOrCancel }) => {
   const { api } = useAxios();
   const { state: profile } = useProfile();
 
+  const { updatePost } = useContext(UpdatePostContext);
+
   const fileInputRef = useRef();
 
   const user = profile?.user ?? auth?.user;
-  const [file, setFile] = useState(null);
-  const [texts, setTexts] = useState("");
+  const [file, setFile] = useState(updatePost?.image || null);
+  const [texts, setTexts] = useState(updatePost?.content || "");
 
-  const { updatePost } = useContext(UpdatePostContext);
+  // console.log("update post from post entry", updatePost);
 
-  console.log("update post from post entry", updatePost);
-
-  const handlePostSubmit = async (data) => {
-    console.log(data); // Debugging the form data
+  const updateEditPost = async () => {};
+  const handlePostSubmit = async () => {
+    // console.log(data); // Debugging the form data
 
     dispatch({ type: actions.post.DATA_FETCHING });
 
-    try {
-      // Create FormData instance
-      const formData = new FormData();
-      formData.append("image", file);
-      formData.append("content", texts);
+    if (updatePost) {
+      // if updatePost have then post will update instead of create new post
+      updateEditPost();
+    } else {
+      try {
+        // Create FormData instance
+        const formData = new FormData();
+        formData.append("image", file);
+        formData.append("content", texts);
 
-      const response = await api.post(
-        `${import.meta.env.VITE_SERVER_BASE_URL}/posts`,
-        formData
-      );
+        const response = await api.post(
+          `${import.meta.env.VITE_SERVER_BASE_URL}/posts`,
+          formData
+        );
 
-      if (response.status === 200) {
+        if (response.status === 200) {
+          dispatch({
+            type: actions.post.DATA_CREATED,
+            data: response.data,
+          });
+
+          console.log(formData);
+          onCreateOrCancel(); // Close the form on success
+        }
+      } catch (error) {
+        console.error("Error uploading post:", error);
+
         dispatch({
-          type: actions.post.DATA_CREATED,
-          data: response.data,
+          type: actions.post.DATA_FETCH_ERROR,
+          error: error.response?.data ?? error.message,
         });
-
-        console.log(formData);
-        onCreateOrCancel(); // Close the form on success
       }
-    } catch (error) {
-      console.error("Error uploading post:", error);
-
-      dispatch({
-        type: actions.post.DATA_FETCH_ERROR,
-        error: error.response?.data ?? error.message,
-      });
     }
   };
 

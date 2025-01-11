@@ -11,4 +11,9 @@ steps -> next = working with profile page bio and image
 
 now in header chcck if it get profile then set its image otherwise set from auth 
 
--> next = complete update post 
+-> next = complete update post (
+    procedure=>
+        (i) after clicking user will navigate to homepage
+        (ii) post entry will focus to do this use lifting to the state up tecnique to visible
+        (iii)
+) 

@@ -12,6 +12,8 @@ const HomePage = () => {
 
   const { api } = useAxios();
 
+  console.log("posts from homepage: ", state);
+
   useEffect(() => {
     dispatch({ type: actions.post.DATA_FETCHING });
 

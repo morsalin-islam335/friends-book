@@ -31,12 +31,13 @@ export default function PostHeader({ post }) {
 
   const Navigate = useNavigate();
 
+  const { setUpdatePost } = useContext(UpdatePostContext);
+
   function toggleAction() {
     setShowAction(!showAction);
   }
 
   const handleEditPost = () => {
-    const { setUpdatePost } = useContext(UpdatePostContext);
     setUpdatePost(() => post);
     Navigate("/");
   };
@@ -48,7 +49,6 @@ export default function PostHeader({ post }) {
       const response = await api.delete(
         `${import.meta.env.VITE_SERVER_BASE_URL}/posts/${post.id}`
       );
-      import { Navigate } from "react-router-dom";
 
       if (response.status === 200) {
         dispatch({
@@ -102,7 +102,10 @@ export default function PostHeader({ post }) {
 
           {showAction && (
             <div className="action-modal-container">
-              <button className="action-menu-item hover:text-morsalinGreen">
+              <button
+                onClick={handleEditPost}
+                className="action-menu-item hover:text-morsalinGreen"
+              >
                 <img src={EditIcon} alt="Edit" />
                 Edit
               </button>
