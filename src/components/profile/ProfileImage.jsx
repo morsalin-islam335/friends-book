@@ -9,9 +9,9 @@ import { actions } from "./../../actions/index";
 
 export default function ProfileImage() {
   const { state, dispatch } = useProfile();
-  const { auth, setAuth } = useAuth(); // retrive auth and setAuth from useAuth hook
+  const { setAuth } = useAuth(); // retrive auth and setAuth from useAuth hook
 
-  console.log("state from profileImage ", state);
+  // console.log("state from profileImage ", state);
 
   const { api } = useAxios();
 

@@ -6,15 +6,19 @@ import { useProfile } from "./../../hooks/useProfile";
 
 import { actions } from "../../actions";
 import useAuth from "./../../hooks/useAuth";
-import Field from "./../Field";
+
+import { useEffect, useRef } from "react";
 
 import AddPhoto from "../../assets/icons/addPhoto.svg";
 
+// eslint-disable-next-line react/prop-types
 const PostEntry = ({ onCreateOrCancel }) => {
   const { auth } = useAuth();
   const { dispatch } = usePost();
   const { api } = useAxios();
   const { state: profile } = useProfile();
+
+  const fileInputRef = useRef();
 
   const user = profile?.user ?? auth?.user;
 
@@ -22,17 +26,29 @@ const PostEntry = ({ onCreateOrCancel }) => {
     register,
     handleSubmit,
     formState: { errors },
-    setError,
   } = useForm();
 
-  const handlePostSubmit = async (formData) => {
-    console.log(formData);
+  const handlePostSubmit = async (data) => {
+    console.log(data); // Debugging the form data
+
     dispatch({ type: actions.post.DATA_FETCHING });
 
     try {
+      // Create FormData instance
+      const formData = new FormData();
+
+      // Append text content
+      formData.append("content", data.content);
+
+      // Append photo if file is selected
+      if (fileInputRef.current?.files[0]) {
+        formData.append("photo", fileInputRef.current.files[0]);
+      }
+
+      // API call to submit post
       const response = await api.post(
         `${import.meta.env.VITE_SERVER_BASE_URL}/posts`,
-        { formData }
+        formData
       );
 
       if (response.status === 200) {
@@ -40,25 +56,42 @@ const PostEntry = ({ onCreateOrCancel }) => {
           type: actions.post.DATA_CREATED,
           data: response.data,
         });
-        // Close this UI
-        onCreateOrCancel();
+
+        console.log(formData);
+        onCreateOrCancel(); // Close the form on success
       }
     } catch (error) {
-      console.error(error);
+      console.error("Error uploading post:", error);
+
       dispatch({
         type: actions.post.DATA_FETCH_ERROR,
-        // eslint-disable-next-line no-undef
-        error: response.error,
+        error: error.response?.data ?? error.message,
       });
     }
   };
+
+  const handleFileChange = () => {
+    console.log(fileInputRef.current.files[0]); // Log the selected file
+  };
+
+  const handleImageUpload = (event) => {
+    event.preventDefault();
+    fileInputRef.current.click(); // Programmatically open the file browser
+  };
+
+  useEffect(() => {
+    console.log("fileInputRef.current:", fileInputRef.current);
+  }, []);
 
   return (
     <div className="card relative">
       <h6 className="mb-3 text-center text-lg font-bold lg:text-xl">
         Create Post
       </h6>
-      <form onSubmit={handleSubmit(handlePostSubmit)}>
+      {/* <form
+        onSubmit={handleSubmit(handlePostSubmit)}
+        encType="multipart/form-data"
+      >
         <div className="mb-3 flex items-center justify-between gap-2 lg:mb-6 lg:gap-4">
           <div className="flex items-center gap-3">
             <img
@@ -70,7 +103,76 @@ const PostEntry = ({ onCreateOrCancel }) => {
             />
             <div>
               <h6 className="text-lg lg:text-xl">
-                {user?.firstName} {user?.lastName}{" "}
+                {user?.firstName} {user?.lastName}
+              </h6>
+              <span className="text-sm text-gray-400 lg:text-base">Public</span>
+            </div>
+          </div>
+
+          <button
+            className="btn-primary cursor-pointer !text-gray-100"
+            onClick={handleImageUpload}
+          >
+            <img src={AddPhoto} alt="Add Photo" />
+            Add Photo
+          </button>
+
+
+          <Field label="" error={errors.photo}>
+            <input
+              type="file"
+              name="photo"
+              id="photo"
+              className="hidden"
+              ref={(e) => {
+                fileInputRef.current = e; // Assign the DOM element to fileInputRef
+                register("photo").ref(e); // Attach react-hook-form's ref
+              }}
+              onChange={handleFileChange}
+            />
+          </Field>
+        </div>
+        <Field label="" error={errors.content}>
+          <textarea
+            {...register("content", {
+              required: "Adding some text is mandatory!",
+            })}
+            name="content"
+            id="content"
+            placeholder="Share your thoughts..."
+            className="h-[120px] w-full bg-transparent focus:outline-none lg:h-[160px]"
+          ></textarea>
+        </Field>
+        <div className="flex gap-6 border-t border-[#3F3F3F] pt-4 lg:pt-6">
+          <button
+            className="auth-input bg-morsalinGreen font-bold text-deepDark transition-all hover:opacity-90"
+            type="submit"
+          >
+            Post
+          </button>
+
+          <button
+            className="auth-input bg-red-500 font-bold text-deepDark transition-all hover:opacity-90"
+            onClick={onCreateOrCancel}
+          >
+            Cancel
+          </button>
+        </div>
+      </form> */}
+
+      <form>
+        <div className="mb-3 flex items-center justify-between gap-2 lg:mb-6 lg:gap-4">
+          <div className="flex items-center gap-3">
+            <img
+              className="max-w-10 max-h-10 rounded-full lg:max-h-[58px] lg:max-w-[58px]"
+              src={`${import.meta.env.VITE_SERVER_BASE_URL}/${
+                auth?.user?.avatar
+              }`}
+              alt="avatar"
+            />
+            <div>
+              <h6 className="text-lg lg:text-xl">
+                {user?.firstName} {user?.lastName}
               </h6>
 
               <span className="text-sm text-gray-400 lg:text-base">Public</span>
@@ -86,17 +188,14 @@ const PostEntry = ({ onCreateOrCancel }) => {
           </label>
           <input type="file" name="photo" id="photo" className="hidden" />
         </div>
-        <Field label="" error={errors.content}>
-          <textarea
-            {...register("content", {
-              required: "Adding some text is mandatory!",
-            })}
-            name="content"
-            id="content"
-            placeholder="Share your thoughts..."
-            className="h-[120px] w-full bg-transparent focus:outline-none lg:h-[160px]"
-          ></textarea>
-        </Field>
+        {/* <!-- Post Text Input --> */}
+
+        <textarea
+          name="post"
+          id="post"
+          placeholder="Share your thoughts..."
+          className="h-[120px] w-full bg-transparent focus:outline-none lg:h-[160px]"
+        ></textarea>
         <div className="flex gap-6 border-t border-[#3F3F3F] pt-4 lg:pt-6">
           <button
             className="auth-input bg-morsalinGreen font-bold text-deepDark transition-all hover:opacity-90"

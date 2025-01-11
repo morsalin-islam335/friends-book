@@ -5,7 +5,7 @@ export default function MyPosts() {
   const { state } = useProfile();
   const posts = state?.posts;
 
-  console.log(posts);
+  // console.log(posts);
 
   return (
     <>
