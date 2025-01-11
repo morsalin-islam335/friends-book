@@ -1,8 +1,9 @@
 import { Navigate, Outlet } from "react-router-dom";
 import Header from "../components/Header";
+import ProfileProvider from "../provider/ProfileProvider";
 import useAuth from "./../hooks/useAuth";
 import PostProvider from "./../provider/PostProvider";
-import ProfileProvider from "../provider/ProfileProvider";
+import UpdatePostProvider from "./../provider/UpdatePostProvider";
 
 export default function PrivateRoutes() {
   const { auth } = useAuth();
@@ -12,12 +13,14 @@ export default function PrivateRoutes() {
       {auth.user ? (
         <ProfileProvider>
           <PostProvider>
-            <main className="mx-auto max-w-[1020px] py-8">
-              <div className="container">
-                <Header />
-                <Outlet />
-              </div>
-            </main>
+            <UpdatePostProvider>
+              <main className="mx-auto max-w-[1020px] py-8">
+                <div className="container">
+                  <Header />
+                  <Outlet />
+                </div>
+              </main>
+            </UpdatePostProvider>
           </PostProvider>
         </ProfileProvider>
       ) : (
