@@ -8,7 +8,7 @@ import { useContext } from "react";
 export default function NewPost() {
   const { updatePost, setUpdatePost } = useContext(UpdatePostContext);
 
-  const [showPostEntry, setShowPostEntry] = useState(updatePost || false);
+  const [showPostEntry, setShowPostEntry] = useState(updatePost ? true : false);
   const handleCreateOrCancelOrUpdate = () => {
     setShowPostEntry(() => false);
     setUpdatePost(() => null);

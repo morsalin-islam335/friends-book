@@ -33,7 +33,10 @@ const PostEntry = ({ onCreateOrCancelOrUpdate }) => {
     onCreateOrCancelOrUpdate();
     try {
       const formData = new FormData();
-      formData.append("image", file);
+
+      if (file) {
+        formData.append("image", file);
+      }
       formData.append("content", texts);
       const response = await api.patch(
         `${import.meta.env.VITE_SERVER_BASE_URL}/posts/${updatePost?.id}`,
