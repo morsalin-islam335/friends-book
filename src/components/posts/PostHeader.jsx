@@ -13,6 +13,11 @@ import { actions } from "./../../actions/index";
 import useAxios from "./../../hooks/useAxios";
 import usePost from "./../../hooks/usePost";
 
+import { useNavigate } from "react-router-dom";
+
+import { useContext } from "react";
+import { UpdatePostContext } from "../../context";
+
 export default function PostHeader({ post }) {
   const [showAction, setShowAction] = useState(false);
 
@@ -24,11 +29,17 @@ export default function PostHeader({ post }) {
 
   const { api } = useAxios();
 
+  const Navigate = useNavigate();
+
   function toggleAction() {
     setShowAction(!showAction);
   }
 
-  const handleEditPost = () => {};
+  const handleEditPost = () => {
+    const { setUpdatePost } = useContext(UpdatePostContext);
+    setUpdatePost(() => post);
+    Navigate("/");
+  };
 
   const completeDeletePost = async () => {
     dispatch({ type: actions.post.DATA_FETCHING });
@@ -37,6 +48,7 @@ export default function PostHeader({ post }) {
       const response = await api.delete(
         `${import.meta.env.VITE_SERVER_BASE_URL}/posts/${post.id}`
       );
+      import { Navigate } from "react-router-dom";
 
       if (response.status === 200) {
         dispatch({

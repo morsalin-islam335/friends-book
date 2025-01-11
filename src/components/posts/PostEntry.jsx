@@ -25,9 +25,9 @@ const PostEntry = ({ onCreateOrCancel }) => {
   const [file, setFile] = useState(null);
   const [texts, setTexts] = useState("");
 
-  const object = useContext(UpdatePostContext);
+  const { updatePost } = useContext(UpdatePostContext);
 
-  console.log("update post entry object from post entry", object);
+  console.log("update post from post entry", updatePost);
 
   const handlePostSubmit = async (data) => {
     console.log(data); // Debugging the form data
