@@ -1,15 +1,34 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { UpdatePostContext } from "../../context";
 import useAuth from "../../hooks/useAuth";
 import PostEntry from "./PostEntry";
 
+import { useContext } from "react";
+
 export default function NewPost() {
-  const [showPostEntry, setShowPostEntry] = useState(false);
+  const { updatePost, setUpdatePost } = useContext(UpdatePostContext);
+
+  const [showPostEntry, setShowPostEntry] = useState(updatePost || false);
+  const handleCreateOrCancelOrUpdate = () => {
+    setShowPostEntry(() => false);
+    setUpdatePost(() => null);
+  };
+
+  const newPostRef = useRef();
 
   const { auth } = useAuth();
+
+  useEffect(() => {
+    if (updatePost) {
+      newPostRef.current.focus(); // focus edited post
+    }
+  }, []);
   return (
     <>
       {showPostEntry ? (
-        <PostEntry onCreateOrCancel={() => setShowPostEntry(false)} />
+        <div ref={newPostRef}>
+          <PostEntry onCreateOrCancelOrUpdate={handleCreateOrCancelOrUpdate} />
+        </div>
       ) : (
         <div className="card">
           <div className="flex-center mb-3 gap-2 lg:gap-4">

@@ -13,7 +13,7 @@ import AddPhoto from "../../assets/icons/addPhoto.svg";
 import { UpdatePostContext } from "../../context";
 
 // eslint-disable-next-line react/prop-types
-const PostEntry = ({ onCreateOrCancel }) => {
+const PostEntry = ({ onCreateOrCancelOrUpdate }) => {
   const { auth } = useAuth();
   const { dispatch } = usePost();
   const { api } = useAxios();
@@ -29,7 +29,32 @@ const PostEntry = ({ onCreateOrCancel }) => {
 
   // console.log("update post from post entry", updatePost);
 
-  const updateEditPost = async () => {};
+  const updateEditPost = async () => {
+    onCreateOrCancelOrUpdate();
+    try {
+      const formData = new FormData();
+      formData.append("image", file);
+      formData.append("content", texts);
+      const response = await api.patch(
+        `${import.meta.env.VITE_SERVER_BASE_URL}/posts/${updatePost?.id}`,
+        formData
+      );
+
+      if (response.status === 200) {
+        dispatch({
+          type: actions.post.DATA_EDITED,
+          data: response.data,
+        });
+      }
+    } catch (error) {
+      console.error("Error uploading post:", error);
+
+      dispatch({
+        type: actions.post.DATA_FETCH_ERROR,
+        error: error.response?.data ?? error.message,
+      });
+    }
+  };
   const handlePostSubmit = async () => {
     // console.log(data); // Debugging the form data
 
@@ -57,7 +82,7 @@ const PostEntry = ({ onCreateOrCancel }) => {
           });
 
           console.log(formData);
-          onCreateOrCancel(); // Close the form on success
+          onCreateOrCancelOrUpdate(); // Close the form on success
         }
       } catch (error) {
         console.error("Error uploading post:", error);
@@ -251,7 +276,7 @@ const PostEntry = ({ onCreateOrCancel }) => {
 
           <button
             className="auth-input bg-red-500 font-bold text-deepDark transition-all hover:opacity-90"
-            onClick={onCreateOrCancel}
+            onClick={onCreateOrCancelOrUpdate}
           >
             Cancel
           </button>
