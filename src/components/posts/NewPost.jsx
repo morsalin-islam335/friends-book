@@ -8,21 +8,29 @@ import { useContext } from "react";
 export default function NewPost() {
   const { updatePost, setUpdatePost } = useContext(UpdatePostContext);
 
-  const [showPostEntry, setShowPostEntry] = useState(updatePost ? true : false);
+  const [showPostEntry, setShowPostEntry] = useState(
+    updatePost?.content ? true : false
+  );
   const handleCreateOrCancelOrUpdate = () => {
     setShowPostEntry(() => false);
     setUpdatePost(() => null);
   };
 
   const newPostRef = useRef();
+  const textAreaRef = useRef();
 
   const { auth } = useAuth();
 
   useEffect(() => {
     if (updatePost) {
-      newPostRef.current.focus(); // focus edited post
+      if (showPostEntry) {
+        newPostRef.current.focus();
+      } else {
+        textAreaRef.current.click(); // after clicking this PostEntry will be open
+      }
     }
-  }, []);
+  }, [updatePost]);
+
   return (
     <>
       {showPostEntry ? (
@@ -42,6 +50,7 @@ export default function NewPost() {
 
             <div className="flex-1">
               <textarea
+                ref={textAreaRef}
                 className="h-16 w-full rounded-md bg-lighterDark p-3 focus:outline-none sm:h-20 sm:p-6"
                 name="post"
                 id="post"
