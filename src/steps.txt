@@ -10,3 +10,5 @@ steps -> next = working with profile page bio and image
 
 
 now in header chcck if it get profile then set its image otherwise set from auth 
+
+-> next = complete update post 
