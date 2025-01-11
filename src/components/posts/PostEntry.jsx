@@ -5,9 +5,12 @@ import { useProfile } from "./../../hooks/useProfile";
 import { actions } from "../../actions";
 import useAuth from "./../../hooks/useAuth";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
+
+import { useContext } from "react";
 
 import AddPhoto from "../../assets/icons/addPhoto.svg";
+import { UpdatePostContext } from "../../context";
 
 // eslint-disable-next-line react/prop-types
 const PostEntry = ({ onCreateOrCancel }) => {
@@ -22,6 +25,10 @@ const PostEntry = ({ onCreateOrCancel }) => {
   const [file, setFile] = useState(null);
   const [texts, setTexts] = useState("");
 
+  const object = useContext(UpdatePostContext);
+
+  console.log("update post entry object from post entry", object);
+
   const handlePostSubmit = async (data) => {
     console.log(data); // Debugging the form data
 
@@ -33,17 +40,6 @@ const PostEntry = ({ onCreateOrCancel }) => {
       formData.append("image", file);
       formData.append("content", texts);
 
-      // // Append text content
-      // formData.append("content", data.content);
-
-      // // Append photo if file is selected
-      // if (fileInputRef.current?.files[0]) {
-      //   formData.append("photo", fileInputRef.current.files[0]);
-      // }
-
-      // to do set form data globally
-
-      // API call to submit post
       const response = await api.post(
         `${import.meta.env.VITE_SERVER_BASE_URL}/posts`,
         formData
@@ -116,10 +112,6 @@ const PostEntry = ({ onCreateOrCancel }) => {
   //     });
   //   }
   // };
-
-  useEffect(() => {
-    console.log("fileInputRef.current:", fileInputRef.current);
-  }, []);
 
   return (
     <div className="card relative">

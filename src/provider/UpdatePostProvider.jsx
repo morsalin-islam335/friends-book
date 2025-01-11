@@ -7,7 +7,7 @@ export default function UpdatePostProvider({ children }) {
 
   return (
     <>
-      <UpdatePostContext.Provider value={(updatePost, setUpdatePost)}>
+      <UpdatePostContext.Provider value={{ updatePost, setUpdatePost }}>
         {children}
       </UpdatePostContext.Provider>
     </>

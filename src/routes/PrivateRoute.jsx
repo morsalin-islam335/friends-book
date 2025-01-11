@@ -7,7 +7,7 @@ import UpdatePostProvider from "./../provider/UpdatePostProvider";
 
 export default function PrivateRoutes() {
   const { auth } = useAuth();
-  console.log(auth);
+
   return (
     <>
       {auth.user ? (
