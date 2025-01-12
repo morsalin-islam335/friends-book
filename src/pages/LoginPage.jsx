@@ -2,6 +2,10 @@ import { Link } from "react-router-dom";
 // import AuthIllustration from "../assets/images/auth_illustration.png";
 import AuthIllustration from "../assets/images/authenticationImg.jpg";
 import LoginForm from "../components/auth/LoginForm";
+
+import { FaGoogle } from "react-icons/fa6";
+import { SiGmail } from "react-icons/si";
+
 const LoginPage = () => {
   return (
     <main className="flex min-h-screen items-center justify-center bg-deepDark py-8">
@@ -32,6 +36,23 @@ const LoginPage = () => {
           <div className="mb-5">
             <div className="card">
               <LoginForm />
+              <div>
+                <h3 className="text-white text-center pt-3">Or Sign In With</h3>
+              </div>
+              <div className="py-4 lg:py-6 gap-6 flex justify-center">
+                <div>
+                  <h1>
+                    <button>
+                      <FaGoogle size={40} />
+                    </button>
+                  </h1>
+                </div>
+                <div>
+                  <button>
+                    <SiGmail size={40} />
+                  </button>
+                </div>
+              </div>
               <div className="py-4 lg:py-6">
                 <p className="text-center text-xs text-gray-600/95 lg:text-sm">
                   Don’t have an account?
