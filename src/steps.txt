@@ -17,3 +17,6 @@ now in header chcck if it get profile then set its image otherwise set from auth
         (ii) post entry will focus to do this use lifting to the state up tecnique to visible
         (iii)
 ) 
+
+-> authentication with firebase
+
