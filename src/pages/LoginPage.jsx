@@ -4,7 +4,6 @@ import AuthIllustration from "../assets/images/authenticationImg.jpg";
 import LoginForm from "../components/auth/LoginForm";
 
 import { FaGoogle } from "react-icons/fa6";
-import { SiGmail } from "react-icons/si";
 
 const LoginPage = () => {
   return (
@@ -37,19 +36,14 @@ const LoginPage = () => {
             <div className="card">
               <LoginForm />
               <div>
-                <h3 className="text-white text-center pt-3">Or Sign In With</h3>
+                <h3 className="text-white text-center pt-3">
+                  Or Continue With
+                </h3>
               </div>
               <div className="py-4 lg:py-6 gap-6 flex justify-center">
                 <div>
-                  <h1>
-                    <button>
-                      <FaGoogle size={40} />
-                    </button>
-                  </h1>
-                </div>
-                <div>
                   <button>
-                    <SiGmail size={40} />
+                    <FaGoogle size={40} />
                   </button>
                 </div>
               </div>
