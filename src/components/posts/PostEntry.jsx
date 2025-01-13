@@ -6,6 +6,7 @@ import { actions } from "../../actions";
 import useAuth from "./../../hooks/useAuth";
 
 import { useRef, useState } from "react";
+import Avatar from "../../assets/images/avatars/DefaultAvatar.jpg";
 
 import { useContext } from "react";
 
@@ -229,9 +230,13 @@ const PostEntry = ({ onCreateOrCancelOrUpdate }) => {
           <div className="flex items-center gap-3">
             <img
               className="max-w-10 max-h-10 rounded-full lg:max-h-[58px] lg:max-w-[58px]"
-              src={`${import.meta.env.VITE_SERVER_BASE_URL}/${
+              src={
                 auth?.user?.avatar
-              }`}
+                  ? `${import.meta.env.VITE_SERVER_BASE_URL}/${
+                      auth?.user?.avatar
+                    }`
+                  : Avatar
+              }
               alt="avatar"
             />
             <div>
