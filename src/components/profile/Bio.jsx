@@ -6,6 +6,8 @@ import EditIcon from "../../assets/icons/edit.svg";
 import useAxios from "./../../hooks/useAxios";
 import { useProfile } from "./../../hooks/useProfile";
 
+import { toast } from "react-toastify";
+
 export default function Bio() {
   const { state, dispatch } = useProfile();
   // console.log("state is ", state?.user?.bio);
@@ -33,6 +35,10 @@ export default function Bio() {
           data: response.data,
         });
         setBio(response.data);
+        toast.success("Bio Update Successful!", {
+          position: "top-right", // Positioning the toast at the top-right
+          autoClose: 2000, // Auto close after 2 seconds
+        });
       }
 
       setEditMode(false);

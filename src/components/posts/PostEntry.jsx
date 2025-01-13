@@ -13,6 +13,8 @@ import { useContext } from "react";
 import AddPhoto from "../../assets/icons/addPhoto.svg";
 import { UpdatePostContext } from "../../context";
 
+import { toast } from "react-toastify";
+
 // eslint-disable-next-line react/prop-types
 const PostEntry = ({ onCreateOrCancelOrUpdate }) => {
   const { auth } = useAuth();
@@ -48,6 +50,11 @@ const PostEntry = ({ onCreateOrCancelOrUpdate }) => {
         dispatch({
           type: actions.post.DATA_EDITED,
           data: response.data,
+        });
+
+        toast.info("Post Edit Successful !", {
+          position: "top-right", // Positioning the toast at the top-right
+          autoClose: 2000, // Auto close after 2 seconds
         });
       }
     } catch (error) {
@@ -86,6 +93,11 @@ const PostEntry = ({ onCreateOrCancelOrUpdate }) => {
           });
 
           console.log(formData);
+
+          toast.success("Post Creation Successful", {
+            position: "top-right", // Positioning the toast at the top-right
+            autoClose: 2000, // Auto close after 2 seconds
+          });
           onCreateOrCancelOrUpdate(); // Close the form on success
         }
       } catch (error) {
@@ -151,7 +163,7 @@ const PostEntry = ({ onCreateOrCancelOrUpdate }) => {
   return (
     <div className="card relative">
       <h6 className="mb-3 text-center text-lg font-bold lg:text-xl">
-        Create Post
+        {updatePost ? "Edit Post" : "Create  Post"}
       </h6>
       {/* <form
         onSubmit={handleSubmit(handlePostSubmit)}

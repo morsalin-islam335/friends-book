@@ -10,6 +10,8 @@ import { actions } from "./../../actions/index";
 
 import { useState } from "react";
 
+import { toast } from "react-toastify";
+
 export default function ProfileImage() {
   const { state, dispatch } = useProfile();
   const { setAuth } = useAuth(); // retrive auth and setAuth from useAuth hook
@@ -71,6 +73,11 @@ export default function ProfileImage() {
               avatar: response.data.avatar,
             },
           };
+        });
+
+        toast.success("Profile Picture Update Successful!", {
+          position: "top-right", // Positioning the toast at the top-right
+          autoClose: 2000, // Auto close after 2 seconds
         });
 
         console.log("Update Profile Image and data is", response.data);

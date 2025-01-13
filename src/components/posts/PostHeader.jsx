@@ -18,6 +18,8 @@ import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { UpdatePostContext } from "../../context";
 
+import { toast } from "react-toastify";
+
 export default function PostHeader({ post }) {
   const [showAction, setShowAction] = useState(false);
 
@@ -54,6 +56,11 @@ export default function PostHeader({ post }) {
         dispatch({
           type: actions.post.POST_DELETED,
           data: post.id,
+        });
+
+        toast.error("Post Deleted!", {
+          position: "top-right", // Positioning the toast at the top-right
+          autoClose: 2000, // Auto close after 2 seconds
         });
       }
     } catch (error) {
