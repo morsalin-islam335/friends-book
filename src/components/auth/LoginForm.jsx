@@ -6,6 +6,8 @@ import Field from "../Field";
 import { useContext } from "react";
 import { AuthContext } from "../../context";
 
+import { toast } from "react-toastify";
+
 const LoginForm = () => {
   const navigate = useNavigate();
   const { setAuth } = useContext(AuthContext);
@@ -26,6 +28,10 @@ const LoginForm = () => {
 
       if (response.status === 200) {
         //ok
+        toast.success("Login Successfull!", {
+          position: "top-right", // Positioning the toast at the top-right
+          autoClose: 2000, // Auto close after 2 seconds
+        });
         const { token, user } = response.data; // response.data have 2 object: user and token
         if (token) {
           const authToken = token.token;
