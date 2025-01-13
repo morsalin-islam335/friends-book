@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 
+import Avatar from "../../assets/images/avatars/DefaultAvatar.jpg";
 export default function PostCommentList({ comments }) {
   return (
     <>
@@ -9,9 +10,13 @@ export default function PostCommentList({ comments }) {
             <div className="flex items-center gap-3 pt-4" key={comment.id}>
               <img
                 className="max-w-6 max-h-6 rounded-full"
-                src={`${import.meta.env.VITE_SERVER_BASE_URL}/${
+                src={
                   comment?.author?.avatar
-                }`}
+                    ? `${import.meta.env.VITE_SERVER_BASE_URL}/${
+                        comment?.author?.avatar
+                      }`
+                    : Avatar
+                }
                 alt="avatar"
               />
 
