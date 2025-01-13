@@ -19,6 +19,8 @@ const Header = () => {
     auth.user.avatar
   }`;
 
+  // console.log("auth profile from header", authProfileIcon);
+
   // console.log("auth from header", auth);
   return (
     <nav className="sticky top-0 z-50 border-b border-[#3F3F3F] bg-[#1E1F24] py-4">
@@ -57,7 +59,7 @@ const Header = () => {
 
             <img
               className="rounded-full h-[60px] w-[60px] lg:h-[44px] lg:w-[44px]"
-              src={authProfileIcon ?? Avatar}
+              src={auth?.user?.avatar ? authProfileIcon : Avatar}
               alt="avatar"
             />
           </Link>
