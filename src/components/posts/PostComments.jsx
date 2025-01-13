@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import useAxios from "./../../hooks/useAxios";
 import PostCommentList from "./PostCommentList";
@@ -43,6 +43,8 @@ export default function PostComments({ post, comments, onComments }) {
       }
     }
   };
+
+  useEffect(() => {}, [comments]);
 
   return (
     <>
