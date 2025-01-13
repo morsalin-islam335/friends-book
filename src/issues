@@ -23,3 +23,5 @@ Use Framer Motion for animation
 Implement REST API for backend
 
 before change login page
+
+If user edit post it will show edit post in post entry header

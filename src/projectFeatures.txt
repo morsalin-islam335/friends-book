@@ -1,0 +1,36 @@
+1. User can create account with his credentials => OK
+2. User can create account with email => !OK
+3. User can switch background colar => !OK
+4. Authentication with Json Web Token (JWT) => OK
+
+5. Authenticate Authenticated user can Create Post => OK
+6. Authenticated user can edit his Post => !OK 
+7. Authenticated user can delete his post  => !OK 
+8. Authenticated user can see all posts => OK 
+9. Authenticated user can see his created post from his profile   => OK
+10. Authenticated user can see his profile => OK 
+11. Authenticated user can update his bio => OK 
+12. Authenticated user can change his profile picture => OK
+13. Authenticated user can see his big size profile picture => !OK
+14. Authenticated user can comment his post/s or another person post/s 
+15. Authenticated user can like another user post/posts  => OK
+16. Show message with tostify (after create post, update post, delete post, comment, change profile imagem, change bio data, after login, after logout) => !OK 
+
+17. Animation with framer motion 
+
+
+*** Data Base Design => OK
+################## Future TODO ############
+
+1.   Develop Data Base (PostGreySQL)
+2.   Implement REST API with Django Rest Framework 
+2.   User can watch video from another user posted video.
+3.   User can watch video according to tag/s, (to upload video user     will ask video tag/s)
+
+4.   One user can chat with another user through django chanel 
+5.   One user can audio/video call to another user 
+6.   User can upoad reels (video)
+7.   Finally try to combine facebook and youtube features.
+
+
+
