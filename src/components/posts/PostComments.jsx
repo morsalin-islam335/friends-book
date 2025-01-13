@@ -7,6 +7,8 @@ import PostCommentList from "./PostCommentList";
 
 import Avatar from "../../assets/images/avatars/DefaultAvatar.jpg";
 
+import { toast } from "react-toastify";
+
 export default function PostComments({ post, comments, onComments }) {
   // const { avatarURL } = useAvatar(post);
   const [showComments, setShowComments] = useState(false);
@@ -36,6 +38,10 @@ export default function PostComments({ post, comments, onComments }) {
           ]); // as it is patch request so response.data.comments will return all comments including new comment
           // () => setComments([...response.data.comments]);
           console.log(response.data);
+          toast.success("Comment Add Successfully!", {
+            position: "top-right", // Positioning the toast at the top-right
+            autoClose: 2000, // Auto close after 2 seconds
+          });
         }
         setComment("");
       } catch (error) {

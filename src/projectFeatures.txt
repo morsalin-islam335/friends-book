@@ -5,9 +5,9 @@
 3. User can switch background colar => !OK
 4. Authentication with Json Web Token (JWT) => OK
 
-5. Authenticate Authenticated user can Create Post => OK
-6. Authenticated user can edit his Post => !OK 
-7. Authenticated user can delete his post  => !OK 
+5. Authenticated user can Create Post => OK
+6. Authenticated user can edit his Post => OK 
+7. Authenticated user can delete his post  => OK 
 8. Authenticated user can see all posts => OK 
 9. Authenticated user can see his created post from his profile   => OK
 10. Authenticated user can see his profile => OK 
@@ -15,12 +15,12 @@
 12. Authenticated user can change his profile picture => OK
 
 13. Authenticated user can see his big size profile picture => OK
-14. Authenticated user can comment his post/s or another person post/s 
+14. Authenticated user can comment his post/s or another person post/s => OK 
 15. Authenticated user can like another user post/posts  => OK
-16. Show message with tostify (after create post, update post, delete post, comment, change profile imagem, change bio data, after login, after logout) => !OK 
+16. Show message with tostify (after create post, update post, delete post, comment, change profile image, change bio data, after login, after logout) => OK
 
-17. Animation with framer motion 
-18. Save authentication info in local storage
+17. Animation with framer motion   => !OK
+18. Save authentication info in local storage => !OK
 
 
 
