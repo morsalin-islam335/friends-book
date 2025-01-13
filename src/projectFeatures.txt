@@ -1,3 +1,5 @@
+
+##################### #################################################
 1. User can create account with his credentials => OK
 2. User can create account with email => !OK
 3. User can switch background colar => !OK
@@ -20,7 +22,7 @@
 
 
 *** Data Base Design => OK
-################## Future TODO ############
+################## Future TODO ######################################
 
 1.   Develop Data Base (PostGreySQL)
 2.   Implement REST API with Django Rest Framework 
@@ -34,3 +36,4 @@
 
 
 
+##################################################################
