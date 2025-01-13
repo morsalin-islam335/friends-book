@@ -1,9 +1,8 @@
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
+import Avatar from "../../assets/images/avatars/DefaultAvatar.jpg";
 import { UpdatePostContext } from "../../context";
 import useAuth from "../../hooks/useAuth";
 import PostEntry from "./PostEntry";
-
-import { useContext } from "react";
 
 export default function NewPost() {
   const { updatePost, setUpdatePost } = useContext(UpdatePostContext);
@@ -42,9 +41,13 @@ export default function NewPost() {
           <div className="flex-center mb-3 gap-2 lg:gap-4">
             <img
               className="max-w-10 max-h-10 rounded-full lg:max-h-[58px] lg:max-w-[58px]"
-              src={`${import.meta.env.VITE_SERVER_BASE_URL}/${
+              src={
                 auth?.user?.avatar
-              }`}
+                  ? `${import.meta.env.VITE_SERVER_BASE_URL}/${
+                      auth?.user?.avatar
+                    }`
+                  : Avatar
+              }
               alt="avatar"
             />
 
