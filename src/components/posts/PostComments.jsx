@@ -5,6 +5,8 @@ import useAxios from "./../../hooks/useAxios";
 import PostCommentList from "./PostCommentList";
 // import {useEffect} from "react";
 
+import Avatar from "../../assets/images/avatars/DefaultAvatar.jpg";
+
 export default function PostComments({ post, comments, onComments }) {
   // const { avatarURL } = useAvatar(post);
   const [showComments, setShowComments] = useState(false);
@@ -48,9 +50,13 @@ export default function PostComments({ post, comments, onComments }) {
         <div className="flex-center mb-3 gap-2 lg:gap-4">
           <img
             className="max-w-7 max-h-7 rounded-full lg:max-h-[34px] lg:max-w-[34px]"
-            src={`${import.meta.env.VITE_SERVER_BASE_URL}/${
+            src={
               auth?.user?.avatar
-            }`}
+                ? `${import.meta.env.VITE_SERVER_BASE_URL}/${
+                    auth?.user?.avatar
+                  }`
+                : Avatar
+            }
             alt="avatar"
           />
 
