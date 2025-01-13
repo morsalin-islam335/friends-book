@@ -3,6 +3,10 @@
 @tailwind components;
 @tailwind utilities;
 
+.dark {
+  @apply bg-[#171923] text-white;
+}
+
 @layer base {
   body {
     @apply bg-deepDark font-inter text-gray-100;

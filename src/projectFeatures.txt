@@ -1,7 +1,7 @@
 
 ##################### #################################################
 1. User can create account with his credentials => OK
-2. User can create account with email => !OK
+2. User can create account with google => !OK
 3. User can switch background colar => !OK
 4. Authentication with Json Web Token (JWT) => OK
 
