@@ -19,13 +19,16 @@ import { useContext } from "react";
 import { UpdatePostContext } from "../../context";
 
 import { toast } from "react-toastify";
+import useAuth from "../../hooks/useAuth";
 
 export default function PostHeader({ post }) {
   const [showAction, setShowAction] = useState(false);
 
   const { avatarURL } = useAvatar(post);
 
-  // const { auth } = useAuth();
+  const { auth } = useAuth();
+
+  console.log(auth);
 
   const { dispatch } = usePost();
 
@@ -102,30 +105,34 @@ export default function PostHeader({ post }) {
           </div>
         </div>
 
-        <div className="relative">
-          <button onClick={toggleAction}>
-            <img src={ThreeDotsIcon} alt="3dots of Action" />
-          </button>
+        {post?.author?.id === auth?.user?.id ? (
+          <div className="relative">
+            <button onClick={toggleAction}>
+              <img src={ThreeDotsIcon} alt="3dots of Action" />
+            </button>
 
-          {showAction && (
-            <div className="action-modal-container">
-              <button
-                onClick={handleEditPost}
-                className="action-menu-item hover:text-morsalinGreen"
-              >
-                <img src={EditIcon} alt="Edit" />
-                Edit
-              </button>
-              <button
-                onClick={(event) => handleDeletePost(event)}
-                className="action-menu-item hover:text-red-500"
-              >
-                <img src={DeleteIcon} alt="Delete" />
-                Delete
-              </button>
-            </div>
-          )}
-        </div>
+            {showAction && (
+              <div className="action-modal-container">
+                <button
+                  onClick={handleEditPost}
+                  className="action-menu-item hover:text-morsalinGreen"
+                >
+                  <img src={EditIcon} alt="Edit" />
+                  Edit
+                </button>
+                <button
+                  onClick={(event) => handleDeletePost(event)}
+                  className="action-menu-item hover:text-red-500"
+                >
+                  <img src={DeleteIcon} alt="Delete" />
+                  Delete
+                </button>
+              </div>
+            )}
+          </div>
+        ) : (
+          ""
+        )}
       </header>
     </>
   );
