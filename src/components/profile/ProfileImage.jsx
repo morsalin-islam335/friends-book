@@ -5,7 +5,10 @@ import useAxios from "./../../hooks/useAxios";
 import { useProfile } from "./../../hooks/useProfile";
 
 import useAuth from "../../hooks/useAuth";
+import ImageModal from "../modals/ImageModal";
 import { actions } from "./../../actions/index";
+
+import { useState } from "react";
 
 export default function ProfileImage() {
   const { state, dispatch } = useProfile();
@@ -13,9 +16,18 @@ export default function ProfileImage() {
 
   // console.log("state from profileImage ", state);
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const imageFile = state?.user?.avatar
+    ? `${import.meta.env.VITE_SERVER_BASE_URL}/${state.user.avatar}`
+    : Avatar;
+
   const { api } = useAxios();
 
   const fileUploadRef = useRef();
+
+  const toggleModal = () => {
+    setIsModalOpen((prev) => !prev);
+  };
 
   const handleImageUpload = (event) => {
     event.preventDefault(); // stop event default behavior
@@ -75,15 +87,22 @@ export default function ProfileImage() {
   return (
     <>
       <div className="relative mb-8 max-h-[180px] max-w-[180px] rounded-full lg:mb-11 lg:max-h-[218px] lg:max-w-[218px]">
-        <img
-          className="max-w-full rounded-full"
-          src={
-            state?.user?.avatar
-              ? `${import.meta.env.VITE_SERVER_BASE_URL}/${state.user.avatar}`
-              : Avatar
-          }
-          alt={`${state?.user?.firstName}`}
+        <ImageModal
+          isOpen={isModalOpen}
+          imageFile={imageFile}
+          onClose={toggleModal}
         />
+        <button onClick={toggleModal}>
+          <img
+            className="max-w-full rounded-full"
+            src={
+              state?.user?.avatar
+                ? `${import.meta.env.VITE_SERVER_BASE_URL}/${state.user.avatar}`
+                : Avatar
+            }
+            alt={`${state?.user?.firstName}`}
+          />
+        </button>
 
         <form encType="multipart/form-data">
           <button
