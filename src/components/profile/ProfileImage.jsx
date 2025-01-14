@@ -12,6 +12,8 @@ import { useState } from "react";
 
 import { toast } from "react-toastify";
 
+import { motion } from "motion/react";
+
 export default function ProfileImage() {
   const { state, dispatch } = useProfile();
   const { setAuth } = useAuth(); // retrive auth and setAuth from useAuth hook
@@ -100,7 +102,7 @@ export default function ProfileImage() {
           onClose={toggleModal}
         />
         <button onClick={toggleModal}>
-          <img
+          <motion.img
             className="max-w-full rounded-full"
             src={
               state?.user?.avatar
@@ -108,6 +110,19 @@ export default function ProfileImage() {
                 : Avatar
             }
             alt={`${state?.user?.firstName}`}
+            animate={{
+              rotate: [0, 90, 180, 270, 360, 0],
+              scale: [1.1, 1.3, 1.5, 1.3, 1.1, 1],
+            }}
+            transition={{ duration: 1.7 }}
+            exit={{
+              x: "-100vw",
+
+              transition: {
+                ease: "easeInOut",
+                duration: 6,
+              },
+            }}
           />
         </button>
 
