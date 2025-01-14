@@ -7,7 +7,6 @@ import DeleteIcon from "../../assets/icons/delete.svg";
 import EditIcon from "../../assets/icons/edit.svg";
 
 import TimeIcon from "../../assets/icons/time.svg";
-import { useAvatar } from "../../hooks/useAvatar";
 import { getDateTimeDifferenceFromNow } from "../../utils";
 import { actions } from "./../../actions/index";
 import useAxios from "./../../hooks/useAxios";
@@ -21,10 +20,12 @@ import { UpdatePostContext } from "../../context";
 import { toast } from "react-toastify";
 import useAuth from "../../hooks/useAuth";
 
+import Avatar from "../../assets/images/avatars/DefaultAvatar.jpg";
+
 export default function PostHeader({ post }) {
   const [showAction, setShowAction] = useState(false);
 
-  const { avatarURL } = useAvatar(post);
+  // const { avatarURL } = useAvatar(post);
 
   const { auth } = useAuth();
 
@@ -90,7 +91,13 @@ export default function PostHeader({ post }) {
         <div className="flex items-center gap-3">
           <img
             className="max-w-10 max-h-10 rounded-full lg:max-h-[58px] lg:max-w-[58px]"
-            src={avatarURL}
+            src={
+              post?.author?.avatar
+                ? `${import.meta.env.VITE_SERVER_BASE_URL}/${
+                    post?.author?.avatar
+                  }`
+                : Avatar
+            }
             alt="avatar"
           />
           <div>

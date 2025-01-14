@@ -100,7 +100,7 @@ export default function PostBody({ poster, content, controls }) {
                     hidden: { opacity: 0 },
                     visible: {
                       opacity: 1,
-                      transition: { duration: 1, delay: index * 0.1 },
+                      transition: { duration: 1, delay: index * 0.01 },
                     },
                   }}
                 >
@@ -118,7 +118,7 @@ export default function PostBody({ poster, content, controls }) {
                 imageFile={imageFile}
                 onClose={toggleModal}
               />
-              <button className="w-1/2" onClick={toggleModal}>
+              <button className="w-4/5" onClick={toggleModal}>
                 <img src={imageFile} alt="poster" />
               </button>
             </>

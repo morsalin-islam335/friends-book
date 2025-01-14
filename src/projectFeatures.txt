@@ -1,7 +1,7 @@
 
 ##################### #################################################
 1. User can create account with his credentials => OK
-2. User can create account with google => !OK
+2. User can create account with google => OK
 3. User can switch background colar => !OK
 4. Authentication with Json Web Token (JWT) => OK
 
@@ -19,7 +19,7 @@
 15. Authenticated user can like another user post/posts  => OK
 16. Show message with tostify (after create post, update post, delete post, comment, change profile image, change bio data, after login, after logout) => OK
 
-17. Animation with framer motion   => !OK
+17. Animation with framer motion   => OK
 18. Save authentication info in local storage => OK
 
 
