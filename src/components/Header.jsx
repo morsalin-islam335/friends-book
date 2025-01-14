@@ -11,6 +11,8 @@ import { Link } from "react-router-dom";
 import useAuth from "./../hooks/useAuth";
 import LogOut from "./auth/LogOut";
 
+import { motion } from "motion/react";
+
 const Header = () => {
   // const { state } = useProfile();
   // console.log("state from header from useProfile hook", state);
@@ -18,6 +20,8 @@ const Header = () => {
   const authProfileIcon = `${import.meta.env.VITE_SERVER_BASE_URL}/${
     auth.user.avatar
   }`;
+
+  const MotionLink = motion(Link);
 
   // console.log("auth profile from header", authProfileIcon);
 
@@ -27,26 +31,46 @@ const Header = () => {
       className={`sticky top-0 z-50 border-b border-[#3F3F3F] bg-[#1E1F24] py-4 `}
     >
       <div className="container flex flex-col items-center justify-between gap-6 sm:flex-row">
-        <Link to="/">
+        <MotionLink
+          to="/"
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+        >
           <img
             className="max-w-[60px] lg:max-w-[100px]"
             src={Logo}
             alt="logo"
           />
-        </Link>
+        </MotionLink>
 
         <div className="flex items-center space-x-4">
-          <Link to="/" className="btn-primary">
+          <MotionLink
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            to="/"
+            className="btn-primary"
+          >
             <img src={HomeIcon} alt="Home" />
             Home
-          </Link>
-          <button className="icon-btn">
+          </MotionLink>
+          <motion.button
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            className="icon-btn"
+          >
             <img src={Notification} alt="Notification" />
-          </button>
+          </motion.button>
 
-          <LogOut />
+          <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+            <LogOut />
+          </motion.button>
 
-          <Link to="/me" className="flex-center !ml-8 gap-3">
+          <MotionLink
+            to="/me"
+            className="flex-center !ml-8 gap-3"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+          >
             <span className="text-lg font-medium lg:text-xl">
               {auth?.user?.firstName} {auth?.user?.lastName}
             </span>
@@ -64,7 +88,7 @@ const Header = () => {
               src={auth?.user?.avatar ? authProfileIcon : Avatar}
               alt="avatar"
             />
-          </Link>
+          </MotionLink>
         </div>
       </div>
     </nav>
