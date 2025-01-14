@@ -5,14 +5,14 @@ import { useEffect } from "react";
 const PostCommentCounter = ({ limit }) => {
   const count = useMotionValue(0);
   const roundedValue = useTransform(count, Math.round);
-
   useEffect(() => {
-    const animation = animate(count, { limit }, { duration: 2 });
+    const animation = animate(count, limit, { duration: 2 });
 
-    return animation.stop;
-  }, []);
+    // Clean up the animation on component unmount
+    return () => animation.stop();
+  }, [count, limit]);
 
-  return <motion.div>{roundedValue}</motion.div>;
+  return <motion.span>{roundedValue}</motion.span>;
 };
 
 export default PostCommentCounter;

@@ -8,11 +8,14 @@ import { useState } from "react";
 import ShareIcon from "../../assets/icons/share.svg";
 import useAuth from "./../../hooks/useAuth";
 import useAxios from "./../../hooks/useAxios";
+import PostCommentCounter from "./PostCommentCounter";
 
 export default function PostAction({ post, comments }) {
   const { api } = useAxios();
   const { auth } = useAuth();
   const [like, setLike] = useState(post?.likes?.includes(auth?.user?.id));
+
+  console.log(comments);
 
   const handleLike = async () => {
     try {
@@ -45,7 +48,9 @@ export default function PostAction({ post, comments }) {
         </button>
         <button className="icon-btn space-x-2 px-6 py-3 text-xs lg:px-12 lg:text-sm">
           <img src={CommentIcon} alt="Comment" />
-          <span>Comment({comments?.length ?? 0})</span>
+          <span>
+            Comment (<PostCommentCounter limit={comments?.length} />)
+          </span>
         </button>
 
         <button className="flex-center gap-2 text-xs font-bold text-[#B8BBBF] hover:text-white lg:text-sm">
