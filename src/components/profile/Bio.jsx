@@ -8,6 +8,8 @@ import { useProfile } from "./../../hooks/useProfile";
 
 import { toast } from "react-toastify";
 
+import { motion } from "motion/react";
+
 export default function Bio() {
   const { state, dispatch } = useProfile();
   // console.log("state is ", state?.user?.bio);
@@ -55,9 +57,23 @@ export default function Bio() {
       <div className="mt-4 flex items-start gap-2 lg:mt-6">
         <div className="flex-1">
           {!editMode ? (
-            <p className="leading-[188%] text-grey-400 lg:text-lg">
+            <motion.p
+              className="leading-[188%] text-grey-400 lg:text-lg"
+              animate={{
+                scale: [1, 1.1, 1.2, 1.3, 1.2, 1.1, 1],
+              }}
+              transition={{ duration: 1.3 }}
+              exit={{
+                x: "-100vw",
+
+                transition: {
+                  ease: "easeInOut",
+                  duration: 6,
+                },
+              }}
+            >
               {state?.user?.bio}
-            </p>
+            </motion.p>
           ) : (
             <textarea
               className='p-2 className="leading-[188%] text-gray-600 lg:text-lg rounded-md'
