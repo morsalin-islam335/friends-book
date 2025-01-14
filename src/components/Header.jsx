@@ -54,14 +54,14 @@ const Header = () => {
             Home
           </MotionLink>
           <motion.button
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
+            whileHover={{ scale: 1.8 }}
+            whileTap={{ scale: 1.3 }}
             className="icon-btn"
           >
             <img src={Notification} alt="Notification" />
           </motion.button>
 
-          <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+          <motion.button whileHover={{ scale: 1.8 }} whileTap={{ scale: 1.3 }}>
             <LogOut />
           </motion.button>
 
