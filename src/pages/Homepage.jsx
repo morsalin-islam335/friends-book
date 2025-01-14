@@ -51,7 +51,10 @@ const HomePage = () => {
   return (
     <div>
       <NewPost />
-      <PostList posts={state?.posts} />
+
+      <div className="mt-20">
+        <PostList posts={state?.posts} />
+      </div>
     </div>
   );
 };
