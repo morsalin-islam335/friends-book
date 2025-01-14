@@ -6,6 +6,7 @@ import Avatar from "../assets/images/avatars/DefaultAvatar.jpg";
 // import Logo from "../assets/images/logo.svg";
 // import Logo from "../assets/icons/friendsBookLogo.svg";
 import Logo from "../assets/images/logo.png";
+// import Logo from "../assets/images/friends-book-logo.jpg";
 
 import { Link } from "react-router-dom";
 import useAuth from "./../hooks/useAuth";

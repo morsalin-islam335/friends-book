@@ -16,7 +16,9 @@ export default function Bio() {
 
   const { api } = useAxios();
 
-  const [bio, setBio] = useState(state?.user?.bio ?? "hello world");
+  const [bio, setBio] = useState(
+    state?.user?.bio ?? `This is  ${state?.user?.firstName}`
+  );
   const [editMode, setEditMode] = useState(false);
 
   const handleBioChange = async (event) => {
@@ -36,7 +38,7 @@ export default function Bio() {
           type: actions.profile.USER_DATA_FETCHED,
           data: response.data,
         });
-        setBio(response.data);
+        setBio(response.data.bio);
         toast.success("Bio Update Successful!", {
           position: "top-right", // Positioning the toast at the top-right
           autoClose: 2000, // Auto close after 2 seconds
