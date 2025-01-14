@@ -20,7 +20,7 @@
 16. Show message with tostify (after create post, update post, delete post, comment, change profile image, change bio data, after login, after logout) => OK
 
 17. Animation with framer motion   => !OK
-18. Save authentication info in local storage => !OK
+18. Save authentication info in local storage => OK
 
 
 
