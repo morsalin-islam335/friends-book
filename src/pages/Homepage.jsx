@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { actions } from "../actions";
 import PostList from "../components/posts/PostList";
 
+import LoadingScreen from "../components/LoadingScreen";
 import NewPost from "../components/posts/NewPost";
 import useAxios from "../hooks/useAxios";
 import usePost from "../hooks/usePost";
@@ -41,7 +42,7 @@ const HomePage = () => {
   }, []);
 
   if (state?.loading) {
-    return <div> We are working...</div>;
+    return <LoadingScreen />;
   }
 
   if (state?.error) {
