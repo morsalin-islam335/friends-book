@@ -29,6 +29,7 @@ import AuthProvider from "./provider/AuthProvider.jsx";
 import ThemProvider from "./provider/ThemProvider.jsx";
 
 // Import ToastContainer and its CSS
+import { AnimatePresence } from "motion/react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -36,11 +37,13 @@ createRoot(document.getElementById("root")).render(
   <StrictMode>
     <AuthProvider>
       <ThemProvider>
-        <Router>
-          <App />
-          {/* Add ToastContainer here */}
-          <ToastContainer />
-        </Router>
+        <AnimatePresence>
+          <Router>
+            <App />
+            {/* Add ToastContainer here */}
+            <ToastContainer />
+          </Router>
+        </AnimatePresence>
       </ThemProvider>
     </AuthProvider>
   </StrictMode>
