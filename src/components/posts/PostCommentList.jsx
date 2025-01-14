@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 
 import Avatar from "../../assets/images/avatars/DefaultAvatar.jpg";
+import PostCommentCounter from "./PostCommentCounter";
 export default function PostCommentList({ comments }) {
   return (
     <>
@@ -25,7 +26,9 @@ export default function PostCommentList({ comments }) {
                   <span className="font-extrabold">
                     {comment?.author?.name}
                   </span>
-                  <span>{comment?.comment}</span>
+                  <span>
+                    <PostCommentCounter limit={comment?.comment} />
+                  </span>
                 </div>
               </div>
             </div>
