@@ -52,9 +52,7 @@ const HomePage = () => {
     <div>
       <NewPost />
 
-      <div className="mt-20">
-        <PostList posts={state?.posts} />
-      </div>
+      <PostList posts={state?.posts} />
     </div>
   );
 };

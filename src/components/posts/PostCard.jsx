@@ -54,14 +54,16 @@ export default function PostCard({ post }) {
   return (
     <motion.article
       className="card mt-6 lg:mt-8"
-      initial={{ opacity: 0, x: -50, y: -100 }}
+      initial={{ opacity: 0, x: -50, y: -100, scale: 0.8 }}
       whileInView={{
         opacity: 1,
         x: 0,
-        transition: { duration: 1.3 },
+        y: 0,
+        scale: 1,
+        transition: { duration: 1.2 },
       }}
       onViewportEnter={() => controls.start("visible")} // Trigger PostBody animation
-      viewport={{ once: true }} // Ensure animation triggers only once
+      viewport={{ once: false }} // Ensure animation triggers only once
     >
       <PostHeader post={post} />
       <PostBody
