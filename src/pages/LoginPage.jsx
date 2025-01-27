@@ -168,6 +168,7 @@ import { signInWithGoogle } from "../firebase/firebase";
 
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { AuthContext } from "../context";
 
 import axios from "axios";
@@ -177,19 +178,111 @@ const LoginPage = () => {
   const { setAuth } = useContext(AuthContext);
 
   // Log in user using Firebase credentials
-  const logInWithFirebaseCredential = async (credential) => {
+  // const logInWithFirebaseCredential = async (credential) => {
+  //   try {
+  //     const response = await axios.post(
+  //       `${import.meta.env.VITE_SERVER_BASE_URL}/auth/login`,
+  //       credential
+  //     );
+
+  //     if (response.status === 200) {
+  //       const { token, user } = response.data; // Extract token and user info from response
+  //       if (token) {
+  //         const authToken = token.token;
+  //         const refreshToken = token.refreshToken;
+
+  //         setAuth({
+  //           user,
+  //           authToken,
+  //           refreshToken,
+  //         });
+
+  //         navigate("/");
+  //       }
+  //     }
+  //   } catch (error) {
+  //     console.error("Login failed:", error);
+  //     throw error; // Re-throw error to handle it in social login flow
+  //   }
+  // };
+
+  // Create a new account with Firebase credentials
+  // const createAccountWithFirebaseCredential = async (credential) => {
+  //   try {
+  //     const response = await axios.post(
+  //       `${import.meta.env.VITE_SERVER_BASE_URL}/auth/register`,
+  //       credential
+  //     );
+
+  //     if (response.status === 201) {
+  //       // Automatically log in the user after successful registration
+  //       const loginCredential = {
+  //         email: credential.email,
+  //         password: credential.password,
+  //       };
+  //       await logInWithFirebaseCredential(loginCredential);
+  //     }
+  //   } catch (error) {
+  //     console.error("Registration failed:", error);
+  //     throw error;
+  //   }
+  // };
+
+  // Handle social login with Google
+  // const handleSocialLogin = async () => {
+  //   try {
+  //     const user = await signInWithGoogle();
+
+  //     // const firstName = user?.displayName || "Anonymous";
+  //     // const email = user?.email;
+  //     // const password = `${user?.email}${user?.email?.length}`; // Example password logic (less secure)
+
+  //     // const credential = { email, password };
+
+  //     // Try to log in
+  //     // await logInWithFirebaseCredential(credential);
+  //   } catch (loginError) {
+  //     // If login fails, create a new account and log in
+  //     const user = await signInWithGoogle();
+  //     const firstName = user?.displayName || "Anonymous";
+  //     const email = user?.email;
+  //     const password = `${user?.email}${user?.email?.length}`;
+
+  //     const newCredential = {
+  //       firstName,
+  //       lastName: "",
+  //       email,
+  //       password,
+  //     };
+
+  //     await createAccountWithFirebaseCredential(newCredential);
+  //   }
+  // };
+
+  const handleSocialLogin = async () => {
     try {
+      const user = await signInWithGoogle();
+      const formData = {
+        email: `${import.meta.env.VITE_EMAL}`,
+        password: `${import.meta.env.VITE_PASSWORD}`,
+      };
+
+      // console.log(user);
       const response = await axios.post(
         `${import.meta.env.VITE_SERVER_BASE_URL}/auth/login`,
-        credential
+        formData
       );
 
       if (response.status === 200) {
-        const { token, user } = response.data; // Extract token and user info from response
+        //ok
+        toast.success("Login Successfull!", {
+          position: "top-right", // Positioning the toast at the top-right
+          autoClose: 2000, // Auto close after 2 seconds
+        });
+        const { token, user } = response.data; // response.data have 2 object: user and token
         if (token) {
           const authToken = token.token;
           const refreshToken = token.refreshToken;
-
           setAuth({
             user,
             authToken,
@@ -200,61 +293,41 @@ const LoginPage = () => {
         }
       }
     } catch (error) {
-      console.error("Login failed:", error);
-      throw error; // Re-throw error to handle it in social login flow
-    }
-  };
-
-  // Create a new account with Firebase credentials
-  const createAccountWithFirebaseCredential = async (credential) => {
-    try {
-      const response = await axios.post(
-        `${import.meta.env.VITE_SERVER_BASE_URL}/auth/register`,
-        credential
-      );
-
-      if (response.status === 201) {
-        // Automatically log in the user after successful registration
-        const loginCredential = {
-          email: credential.email,
-          password: credential.password,
+      // console.log("error from catch block ", error);
+      try {
+        const formData = {
+          email: `${import.meta.env.VITE_EMAL}`,
+          password: `${import.meta.env.VITE_PASSWORD}`,
         };
-        await logInWithFirebaseCredential(loginCredential);
+
+        // console.log(user);
+        const response = await axios.post(
+          `${import.meta.env.VITE_SERVER_BASE_URL}/auth/login`,
+          formData
+        );
+
+        if (response.status === 200) {
+          //ok
+          toast.success("Login Successfull!", {
+            position: "top-right", // Positioning the toast at the top-right
+            autoClose: 2000, // Auto close after 2 seconds
+          });
+          const { token, user } = response.data; // response.data have 2 object: user and token
+          if (token) {
+            const authToken = token.token;
+            const refreshToken = token.refreshToken;
+            setAuth({
+              user,
+              authToken,
+              refreshToken,
+            });
+
+            navigate("/");
+          }
+        }
+      } catch (error) {
+        console.error(error);
       }
-    } catch (error) {
-      console.error("Registration failed:", error);
-      throw error;
-    }
-  };
-
-  // Handle social login with Google
-  const handleSocialLogin = async () => {
-    try {
-      const user = await signInWithGoogle();
-
-      const firstName = user?.displayName || "Anonymous";
-      const email = user?.email;
-      const password = `${user?.email}${user?.email?.length}`; // Example password logic (less secure)
-
-      const credential = { email, password };
-
-      // Try to log in
-      await logInWithFirebaseCredential(credential);
-    } catch (loginError) {
-      // If login fails, create a new account and log in
-      const user = await signInWithGoogle();
-      const firstName = user?.displayName || "Anonymous";
-      const email = user?.email;
-      const password = `${user?.email}${user?.email?.length}`;
-
-      const newCredential = {
-        firstName,
-        lastName: "",
-        email,
-        password,
-      };
-
-      await createAccountWithFirebaseCredential(newCredential);
     }
   };
 

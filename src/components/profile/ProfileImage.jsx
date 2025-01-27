@@ -120,7 +120,7 @@ export default function ProfileImage() {
 
               transition: {
                 ease: "easeInOut",
-                duration: 6,
+                duration: 1,
               },
             }}
           />

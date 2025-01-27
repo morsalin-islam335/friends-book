@@ -35,7 +35,7 @@ export default function Profile() {
       }
     };
     fetchProfile();
-  }, [auth]);
+  }, [auth, state]);
 
   if (state.loading) {
     return (

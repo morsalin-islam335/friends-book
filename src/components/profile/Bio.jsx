@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CheckIcon from "../../assets/icons/check.svg";
 import { actions } from "./../../actions/index";
 
@@ -9,15 +9,18 @@ import { useProfile } from "./../../hooks/useProfile";
 import { toast } from "react-toastify";
 
 import { motion } from "motion/react";
+import useAuth from "../../hooks/useAuth";
 
 export default function Bio() {
   const { state, dispatch } = useProfile();
   // console.log("state is ", state?.user?.bio);
+  const { auth } = useAuth();
+  // console.log(auth);
 
   const { api } = useAxios();
 
   const [bio, setBio] = useState(
-    state?.user?.bio ?? `This is  ${state?.user?.firstName}`
+    auth?.user?.bio ?? `This is  ${state?.user?.firstName}`
   );
   const [editMode, setEditMode] = useState(false);
 
@@ -54,6 +57,8 @@ export default function Bio() {
     }
   };
 
+  useEffect(() => {}, [state?.user?.bio]);
+
   return (
     <>
       <div className="mt-4 flex items-start gap-2 lg:mt-6">
@@ -70,7 +75,7 @@ export default function Bio() {
 
                 transition: {
                   ease: "easeInOut",
-                  duration: 6,
+                  duration: 1,
                 },
               }}
             >
